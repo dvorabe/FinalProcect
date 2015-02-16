@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,7 +13,7 @@ public partial class _Default : System.Web.UI.Page
 
     public _Default()
     {
-        BibleTextFilePath = Server.MapPath(@"/Assets/bible.txt");
+        BibleTextFilePath = @"D:/MyProj/Assets/bible.txt";//Server.MapPath(@"D:/MyProj/Assets/bible.txt");
         BibleText = System.IO.File.ReadAllText(BibleTextFilePath);
     }
 
@@ -34,7 +35,7 @@ public partial class _Default : System.Web.UI.Page
         List<match> _matches = new List<match>();
         foreach (var item in bSplitted)
         {
-            if (term.IndexOf(item) > 0)
+            if (term.IndexOf(item) > -1)
             {
                 _matches.Add(new match(item, term.IndexOf(item)));
             }
@@ -71,17 +72,24 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (Path.GetExtension(FileUpload1.FileName) != "txt")
+        {
+            errorlbl.Text = "הקובץ לא מסוג txt";
+        }
         var BibleTextToShow = BibleText;
-        var TermToSearch = TextBox1.Text;
+       // var TermToSearch = TextBox1.Text;
+        var userInput= "userinput"+DateTime.Now.ToShortDateString()+Path.GetExtension(FileUpload1.FileName);
+        FileUpload1.SaveAs(Path.Combine(Server.MapPath("~"), "Assets", userInput));
         var TotalWords = int.Parse(TextBox2.Text);
-
-        var results = SearchInBibleText(TermToSearch, TotalWords);
+        var filelines = File.ReadAllText(userInput);
+        var results = SearchInBibleText(filelines, TotalWords);
 
         for (int i = 0; i < results.Count; i++)
         {
-            PlaceHolderResultsPositions.Controls.Add(new Literal() { Text = string.Format("{0}{1}{2}","<div class='col-md-1 '>", results[i].pos,"</div>") });      
+            PlaceHolderResultsPositions.Controls.Add(new Literal() { Text = string.Format("<div data-id='{0}' class='col-md-1 index'>{1}{2}", i, results[i].pos, "</div>") });
+            BibleTextToShow = BibleTextToShow.Replace(results[i].text, string.Format("<span id='{0}' class='bg-success'>{1}{2}", i, results[i].text, "</span>"));
         }
-        BibleTextToShow = BibleTextToShow.Replace(TermToSearch, string.Format("{0}{1}{2}", "<p class='bg-success'>", TermToSearch, "</p>"));
+
         PlaceHolderTextResults.Controls.Add(new Literal() { Text = BibleTextToShow });
     }
 }
