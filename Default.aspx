@@ -24,7 +24,7 @@
              
         <div class="form-group col-md-5">
             <asp:Label ID="Label1" runat="server" Text="טקסט לחיפוש:" AssociatedControlID="TextBox1"></asp:Label>
-          <!  <asp:TextBox ID="TextBox1" class="form-control" runat="server"></asp:TextBox>
+          <!  <asp:TextBox ID="TextBox1" class="form-control1" runat="server"></asp:TextBox>
             <asp:FileUpload ID="FileUpload1" CssClass="form-control1" runat="server" AllowMultiple="True" BorderColor="Black" BorderStyle="Inset" Font-Size="Large" Font-Underline="False" BorderWidth="1" />
         </div>
         <div class="form-group col-md-4">
