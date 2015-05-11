@@ -67,7 +67,7 @@ public partial class _Default : System.Web.UI.Page
         for (int i = 0; i < results.Count; i++)
         {
             //PlaceHolderResultsPositions.Controls.Add(new Literal() { Text = string.Format("<div data-id='{0}' class='col-md-1 index'>{1}{2}", i, results[i].pos, "</div>") });
-            filelines = filelines.Replace(results[i].text, string.Format("<span id='{0}' class='bg-success'>{1}{2}", i, results[i].text, "</span>"));
+            filelines = filelines.Replace(results[i].text, string.Format("<span id='{0}' class='bg-success' title='{3}'>{1}{2}", i, results[i].text, "</span>", "perek 1 pasuk 1 <br />perek n pasuk m"));
         }
 
         filelines = filelines.Replace(Environment.NewLine, "<br />");

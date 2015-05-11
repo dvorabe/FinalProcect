@@ -18,3 +18,39 @@ public partial class grams3
     public string thirdword { get; set; }
     public int Id { get; set; }
 }
+
+public partial class grams3pos
+{
+    public int gram3id { get; set; }
+    public Nullable<int> seferid { get; set; }
+    public Nullable<int> perekid { get; set; }
+    public Nullable<int> pasukid { get; set; }
+}
+
+public partial class Sfarim
+{
+    public Sfarim()
+    {
+        this.Tanach = new HashSet<Tanach>();
+    }
+
+    public int Id { get; set; }
+    public string seferName { get; set; }
+
+    public virtual ICollection<Tanach> Tanach { get; set; }
+}
+
+public partial class Table
+{
+    public int gram3id { get; set; }
+}
+
+public partial class Tanach
+{
+    public int sefer { get; set; }
+    public string perek { get; set; }
+    public string pasuk { get; set; }
+    public string txt { get; set; }
+
+    public virtual Sfarim Sfarim { get; set; }
+}

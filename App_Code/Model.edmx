@@ -7,6 +7,14 @@
     <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="DatabaseModelStoreContainer">
           <EntitySet Name="grams3" EntityType="DatabaseModel.Store.grams3" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="grams3pos" EntityType="DatabaseModel.Store.grams3pos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sfarim" EntityType="DatabaseModel.Store.Sfarim" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Table" EntityType="DatabaseModel.Store.Table" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tanach" EntityType="DatabaseModel.Store.Tanach" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Tanach_Sefer" Association="DatabaseModel.Store.FK_Tanach_Sefer">
+            <End Role="Sfarim" EntitySet="Sfarim" />
+            <End Role="Tanach" EntitySet="Tanach" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="grams3">
           <Key>
@@ -20,12 +28,65 @@
           <Property Name="thirdword" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="grams3pos">
+          <Key>
+            <PropertyRef Name="gram3id" />
+          </Key>
+          <Property Name="gram3id" Type="int" Nullable="false" />
+          <Property Name="seferid" Type="int" />
+          <Property Name="perekid" Type="int" />
+          <Property Name="pasukid" Type="int" />
+        </EntityType>
+        <EntityType Name="Sfarim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="seferName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="gram3id" />
+          </Key>
+          <Property Name="gram3id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tanach">
+          <Key>
+            <PropertyRef Name="sefer" />
+            <PropertyRef Name="perek" />
+            <PropertyRef Name="pasuk" />
+          </Key>
+          <Property Name="sefer" Type="int" Nullable="false" />
+          <Property Name="perek" Type="varchar" Nullable="false" MaxLength="8" />
+          <Property Name="pasuk" Type="varchar" Nullable="false" MaxLength="8" />
+          <Property Name="txt" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Tanach_Sefer">
+          <End Role="Sfarim" Type="DatabaseModel.Store.Sfarim" Multiplicity="1" />
+          <End Role="Tanach" Type="DatabaseModel.Store.Tanach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sfarim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tanach">
+              <PropertyRef Name="sefer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DatabaseEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="grams3" EntityType="DatabaseModel.grams3" />
+          <EntitySet Name="grams3pos" EntityType="DatabaseModel.grams3pos" />
+          <EntitySet Name="Sfarim" EntityType="DatabaseModel.Sfarim" />
+          <EntitySet Name="Table" EntityType="DatabaseModel.Table" />
+          <EntitySet Name="Tanach" EntityType="DatabaseModel.Tanach" />
+          <AssociationSet Name="FK_Tanach_Sefer" Association="DatabaseModel.FK_Tanach_Sefer">
+            <End Role="Sfarim" EntitySet="Sfarim" />
+            <End Role="Tanach" EntitySet="Tanach" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="grams3">
           <Key>
@@ -33,13 +94,60 @@
             <PropertyRef Name="secondword" />
             <PropertyRef Name="thirdword" />
           </Key>
-          <Property Name="freq" Type="Int32" Nullable="false" />
-          <Property Name="firstword" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="secondword" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="thirdword" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="freq" Nullable="false" />
+          <Property Type="String" Name="firstword" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="secondword" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="thirdword" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
-      </Schema>
+        <EntityType Name="grams3pos">
+          <Key>
+            <PropertyRef Name="gram3id" />
+          </Key>
+          <Property Type="Int32" Name="gram3id" Nullable="false" />
+          <Property Type="Int32" Name="seferid" />
+          <Property Type="Int32" Name="perekid" />
+          <Property Type="Int32" Name="pasukid" />
+        </EntityType>
+        <EntityType Name="Sfarim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="seferName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tanach" Relationship="DatabaseModel.FK_Tanach_Sefer" FromRole="Sfarim" ToRole="Tanach" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="gram3id" />
+          </Key>
+          <Property Type="Int32" Name="gram3id" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tanach">
+          <Key>
+            <PropertyRef Name="sefer" />
+            <PropertyRef Name="perek" />
+            <PropertyRef Name="pasuk" />
+          </Key>
+          <Property Type="Int32" Name="sefer" Nullable="false" />
+          <Property Type="String" Name="perek" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pasuk" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="txt" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sfarim" Relationship="DatabaseModel.FK_Tanach_Sefer" FromRole="Tanach" ToRole="Sfarim" />
+        </EntityType>
+        <Association Name="FK_Tanach_Sefer">
+          <End Type="DatabaseModel.Sfarim" Role="Sfarim" Multiplicity="1" />
+          <End Type="DatabaseModel.Tanach" Role="Tanach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sfarim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tanach">
+              <PropertyRef Name="sefer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -48,11 +156,46 @@
           <EntitySetMapping Name="grams3">
             <EntityTypeMapping TypeName="DatabaseModel.grams3">
               <MappingFragment StoreEntitySet="grams3">
-                <ScalarProperty Name="freq" ColumnName="freq" />
-                <ScalarProperty Name="firstword" ColumnName="firstword" />
-                <ScalarProperty Name="secondword" ColumnName="secondword" />
-                <ScalarProperty Name="thirdword" ColumnName="thirdword" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="thirdword" ColumnName="thirdword" />
+                <ScalarProperty Name="secondword" ColumnName="secondword" />
+                <ScalarProperty Name="firstword" ColumnName="firstword" />
+                <ScalarProperty Name="freq" ColumnName="freq" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grams3pos">
+            <EntityTypeMapping TypeName="DatabaseModel.grams3pos">
+              <MappingFragment StoreEntitySet="grams3pos">
+                <ScalarProperty Name="pasukid" ColumnName="pasukid" />
+                <ScalarProperty Name="perekid" ColumnName="perekid" />
+                <ScalarProperty Name="seferid" ColumnName="seferid" />
+                <ScalarProperty Name="gram3id" ColumnName="gram3id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sfarim">
+            <EntityTypeMapping TypeName="DatabaseModel.Sfarim">
+              <MappingFragment StoreEntitySet="Sfarim">
+                <ScalarProperty Name="seferName" ColumnName="seferName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="DatabaseModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="gram3id" ColumnName="gram3id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tanach">
+            <EntityTypeMapping TypeName="DatabaseModel.Tanach">
+              <MappingFragment StoreEntitySet="Tanach">
+                <ScalarProperty Name="txt" ColumnName="txt" />
+                <ScalarProperty Name="pasuk" ColumnName="pasuk" />
+                <ScalarProperty Name="perek" ColumnName="perek" />
+                <ScalarProperty Name="sefer" ColumnName="sefer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -6,14 +6,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class addgrams : System.Web.UI.Page
+public partial class addgrams : System.Web.UI.Page 
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         string BibleText;
         string BibleTextFilePath;
         var context = new DatabaseEntities();
-
+        
 
         BibleTextFilePath = @"D:/MyProj/Assets/bible.txt";//Server.MapPath(@"D:/MyProj/Assets/bible.txt");
         BibleText = System.IO.File.ReadAllText(BibleTextFilePath);
@@ -25,6 +25,7 @@ public partial class addgrams : System.Web.UI.Page
         string[] bSplitted = Helper.splitNword(BibleText, 3);
 
        // loop over the n-splitted aray
+
         for (int i = 0; i < bSplitted.Length; i++)
         {
             //split the n-senetence to single variables of word
