@@ -9,7 +9,6 @@
           <EntitySet Name="grams3" EntityType="DatabaseModel.Store.grams3" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="grams3pos" EntityType="DatabaseModel.Store.grams3pos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Sfarim" EntityType="DatabaseModel.Store.Sfarim" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Table" EntityType="DatabaseModel.Store.Table" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tanach" EntityType="DatabaseModel.Store.Tanach" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Tanach_Sefer" Association="DatabaseModel.Store.FK_Tanach_Sefer">
             <End Role="Sfarim" EntitySet="Sfarim" />
@@ -31,11 +30,14 @@
         <EntityType Name="grams3pos">
           <Key>
             <PropertyRef Name="gram3id" />
+            <PropertyRef Name="seferid" />
+            <PropertyRef Name="perekid" />
+            <PropertyRef Name="pasukid" />
           </Key>
           <Property Name="gram3id" Type="int" Nullable="false" />
-          <Property Name="seferid" Type="int" />
-          <Property Name="perekid" Type="int" />
-          <Property Name="pasukid" Type="int" />
+          <Property Name="seferid" Type="int" Nullable="false" />
+          <Property Name="perekid" Type="varchar" Nullable="false" MaxLength="8" />
+          <Property Name="pasukid" Type="varchar" Nullable="false" MaxLength="8" />
         </EntityType>
         <EntityType Name="Sfarim">
           <Key>
@@ -43,12 +45,6 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="seferName" Type="varchar" Nullable="false" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Table">
-          <Key>
-            <PropertyRef Name="gram3id" />
-          </Key>
-          <Property Name="gram3id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tanach">
           <Key>
@@ -81,7 +77,6 @@
           <EntitySet Name="grams3" EntityType="DatabaseModel.grams3" />
           <EntitySet Name="grams3pos" EntityType="DatabaseModel.grams3pos" />
           <EntitySet Name="Sfarim" EntityType="DatabaseModel.Sfarim" />
-          <EntitySet Name="Table" EntityType="DatabaseModel.Table" />
           <EntitySet Name="Tanach" EntityType="DatabaseModel.Tanach" />
           <AssociationSet Name="FK_Tanach_Sefer" Association="DatabaseModel.FK_Tanach_Sefer">
             <End Role="Sfarim" EntitySet="Sfarim" />
@@ -103,11 +98,14 @@
         <EntityType Name="grams3pos">
           <Key>
             <PropertyRef Name="gram3id" />
+            <PropertyRef Name="seferid" />
+            <PropertyRef Name="perekid" />
+            <PropertyRef Name="pasukid" />
           </Key>
           <Property Type="Int32" Name="gram3id" Nullable="false" />
-          <Property Type="Int32" Name="seferid" />
-          <Property Type="Int32" Name="perekid" />
-          <Property Type="Int32" Name="pasukid" />
+          <Property Type="Int32" Name="seferid" Nullable="false" />
+          <Property Type="String" Name="perekid" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pasukid" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Sfarim">
           <Key>
@@ -116,12 +114,6 @@
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="seferName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tanach" Relationship="DatabaseModel.FK_Tanach_Sefer" FromRole="Sfarim" ToRole="Tanach" />
-        </EntityType>
-        <EntityType Name="Table">
-          <Key>
-            <PropertyRef Name="gram3id" />
-          </Key>
-          <Property Type="Int32" Name="gram3id" Nullable="false" />
         </EntityType>
         <EntityType Name="Tanach">
           <Key>
@@ -179,13 +171,6 @@
               <MappingFragment StoreEntitySet="Sfarim">
                 <ScalarProperty Name="seferName" ColumnName="seferName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Table">
-            <EntityTypeMapping TypeName="DatabaseModel.Table">
-              <MappingFragment StoreEntitySet="Table">
-                <ScalarProperty Name="gram3id" ColumnName="gram3id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

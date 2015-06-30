@@ -22,9 +22,9 @@ public partial class grams3
 public partial class grams3pos
 {
     public int gram3id { get; set; }
-    public Nullable<int> seferid { get; set; }
-    public Nullable<int> perekid { get; set; }
-    public Nullable<int> pasukid { get; set; }
+    public int seferid { get; set; }
+    public string perekid { get; set; }
+    public string pasukid { get; set; }
 }
 
 public partial class Sfarim
@@ -38,11 +38,6 @@ public partial class Sfarim
     public string seferName { get; set; }
 
     public virtual ICollection<Tanach> Tanach { get; set; }
-}
-
-public partial class Table
-{
-    public int gram3id { get; set; }
 }
 
 public partial class Tanach

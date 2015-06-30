@@ -5,11 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="fb807ab423064e2ebca816c702318a20" Name="Diagram1" ZoomLevel="85">
-        <EntityTypeShape EntityType="DatabaseModel.grams3" Width="1.5" PointX="2.8046031197554444" PointY="19.908347943755029" />
-        <EntityTypeShape EntityType="DatabaseModel.grams3pos" Width="1.5" PointX="4.6874040014517515" PointY="26.53447070463303" />
-        <EntityTypeShape EntityType="DatabaseModel.Sfarim" Width="1.5" PointX="0.7843330357150794" PointY="1.2996359771581534" />
-        <EntityTypeShape EntityType="DatabaseModel.Table" Width="1.5" PointX="4.0102207846987161" PointY="7.8261716104234438" />
-        <EntityTypeShape EntityType="DatabaseModel.Tanach" Width="1.5" PointX="3.7739034349908605" PointY="0.48479247115775592" />
+        <EntityTypeShape EntityType="DatabaseModel.grams3" Width="1.5" PointX="6.1403071778548455" PointY="13.560295662637937" />
+        <EntityTypeShape EntityType="DatabaseModel.grams3pos" Width="1.5" PointX="6.625" PointY="19.625" />
+        <EntityTypeShape EntityType="DatabaseModel.Sfarim" Width="1.5" PointX="1.3787717024696859" PointY="17.673636012558656" />
+        <EntityTypeShape EntityType="DatabaseModel.Tanach" Width="1.5" PointX="6.1044299612308066" PointY="16.085276298264635" />
         <AssociationConnector Association="DatabaseModel.FK_Tanach_Sefer" />
       </Diagram>
     </edmx:Diagrams>

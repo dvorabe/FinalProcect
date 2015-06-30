@@ -26,6 +26,5 @@ public partial class DatabaseEntities : DbContext
     public DbSet<grams3> grams3 { get; set; }
     public DbSet<grams3pos> grams3pos { get; set; }
     public DbSet<Sfarim> Sfarim { get; set; }
-    public DbSet<Table> Table { get; set; }
     public DbSet<Tanach> Tanach { get; set; }
 }

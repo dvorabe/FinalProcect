@@ -47,4 +47,44 @@ public static class Helper
         }
         return ret.ToArray();
     }
+    public static string merging(string s, string s1, out bool success)
+    {
+        success = false;
+        string result = string.Empty;
+         var sArr= s.Split(' ');
+         var s1Arr = s1.Split(' ');
+         for (int i = 0; i < sArr.Count(); i++)
+         {
+             result += sArr[i] + " ";
+             if (sArr[i] == s1Arr[0])
+             {
+                 success = true;
+                 result += s1.Replace(sArr[i] + " ", "");
+                 break;
+             }
+                   
+
+         }
+         return result;
+    }
+
+ /*   public static bool checkLocal(string s, string s1, int TotalWords)
+    {
+        var context = new DatabaseEntities();
+        switch (TotalWords)
+        {
+            //check if the location of both is a same
+            case 2:
+            //      var query = context.grams3
+            //.Where(g => g.firstword == TempFirst && g.secondword == TempSecond && g.thirdword == TempThird);
+            //      break;
+
+            case 3:
+                break;
+            case 4:
+                break;
+
+        }
+        return true;
+    }*/
 }
