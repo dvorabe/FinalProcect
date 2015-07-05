@@ -18,22 +18,33 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    
+  
+    <h1> מערכת למציאת ציטוטים בטקסטיים עבריים</h1>
+      <br />
     <div class="container">
         <div class="row">
+           
             <div class="col-md-10">
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class ="font">
                     <asp:Label ID="Label1" runat="server" Text="בחר קובץ לטעינה:" AssociatedControlID="FileUpload1"></asp:Label>
-                    <asp:FileUpload ID="FileUpload1" CssClass="form-control1" Width="100%" runat="server" AllowMultiple="True" BorderColor="Black" BorderStyle="Inset" Font-Size="Large" Font-Underline="False" BorderWidth="1" />
-                </div>
-        <div class="form-group col-md-4">
+                    <asp:FileUpload ID="FileUpload1" CssClass="form-control1" Width="100%" runat="server" AllowMultiple="True" BorderColor="Black" BorderStyle="Dotted" Font-Underline="False" BorderWidth="1" />
+               <br />
+                         </div>
+                    </div>
+        <div class="form-group col-md-6">
+            <div class ="font">
             <asp:Label ID="Label2" runat="server" Text="כמה מילים:" AssociatedControlID="TextBox2"></asp:Label>
-            <asp:TextBox ID="TextBox2" class="form-control required NumbersOnly" 
-                TextMode="Number" runat="server"></asp:TextBox>
-            
-        </div>
-        <asp:Button ID="Button1" runat="server" Text="חיפוש" class="btn btn-default" OnClick="Button1_Click"/>
+            <asp:TextBox ID="TextBox2" class="form-control required NumbersOnly" TextMode="Number" BorderColor="Black" BorderStyle="Dotted" runat="server"></asp:TextBox>
+                <br />
             </div>
+        </div>
+            <div class = "col-md-12">
+                <div class ="button">
+        <asp:Button ID="Button1" runat="server" Text="חיפוש" borderClolr="black" class="btn btn-default" BorderStyle="Dotted" Font-Bold="true" BackGround="blue" OnClick="Button1_Click"/>
+                    </div>
+            </div>   
+                </div>
             <div class="col-md-2">
                 <div id="refText"></div>
             </div>

@@ -10,10 +10,28 @@
 }
 
 .marked3 {
-    background-color: magenta;
+    background-color: orangered;
 }
 
 .marked4 {
     background-color: khaki;
+}
+h1 {
+    text-align:center;
+    color:chocolate;
+    font-size:75px;
+    font-style:italic;
+    font-weight:bolder;
+    font-family:Aharoni;
+}
+.font { 
+    font-size:x-large;
+    font-family:David;
+    
+}
+.button {
+    text-align:left;
+    font-family:David;
+    font-size:x-large;
 }
 
